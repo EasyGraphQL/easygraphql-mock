@@ -48,6 +48,76 @@ console.log(mock.Me)
 console.log(mock.Me.email) // 'test@test.com'
 ```
 
+## Result
+
+If the `gql` schema has:
+```graphql
+type Me {
+  id: ID!
+  email: String
+  username: [String]!
+  fullName: String!
+  result: Float
+  phone: [Int]!
+  apiKey: String!
+  friends: [User]!
+  verified: Boolean!
+}
+
+type User {
+  email: String!
+  username: String!
+  fullName: String!
+  phone: String!
+}
+```
+
+Run `easygqlmock`
+```js
+const mock = easygqlmock(schemaCode, {
+  Me: {
+    id: '123',
+    fullName: 'Hello World!',
+    username: ['estrada9166'],
+    result: 10
+  }
+})
+console.log(mock.Me)
+```
+
+And something like this will be the result
+```js
+{ id: '123',
+  email: null,
+  username: [ 'estrada9166' ],
+  fullName: 'Hello World!',
+  result: 10,
+  phone:
+   [ 7534724385,
+     9263352762,
+     1681394931 ],
+  apiKey: 'bHjVBtthqJNiD',
+  friends:
+   [ { email: 'ADXYwQl@TbOD.com',
+       username: 'WvshkLncWMeWuqmDIJ',
+       fullName: 'PLmtYCCuiiYTs',
+       phone: '(614)-054-5551' },
+     { email: 'mBDCzWB@DDRN.com',
+       username: 'JnUbiaddMmcC',
+       fullName: 'IfXumMC',
+       phone: '(535)-528-2819' },
+     { email: 'uKzyenG@ZegA.com',
+       username: 'vOkoEWyTRnSFWB',
+       fullName: 'MVoBlKaqqgbgXNMijBLay',
+       phone: '(472)-781-0329' },
+     { email: 'haXXGeT@vIVR.com',
+       username: 'BuruVBagIgPnINNxCM',
+       fullName: 'aNFEWbDNEApYGId',
+       phone: '(467)-394-9571' } ],
+  verified: false 
+}
+```
+
 ## Demo
 Here is a [Demo](https://github.com/EasyGraphQL/easygqlmock-demo) that can be useful!
 

@@ -3,7 +3,7 @@
 const fs = require('fs')
 const path = require('path')
 var { expect } = require('chai')
-const mockBuilder = require('../lib/mockBuilder')
+const easygqlmock = require('../lib/mockBuilder')
 
 const schemaCode = fs.readFileSync(path.join(__dirname, 'schema', 'schema.gql'), 'utf8')
 
@@ -11,7 +11,7 @@ describe('Create a mock of GraphQL Schema', () => {
   let mock
 
   before(() => {
-    mock = mockBuilder(schemaCode, {
+    mock = easygqlmock(schemaCode, {
       Me: {
         id: '123',
         fullName: 'Hello World!',
@@ -30,6 +30,8 @@ describe('Create a mock of GraphQL Schema', () => {
     //   result: Float
     //   phone: [Int]!
     //   apiKey: String!
+    //   users: [User]!
+    //   verified: Boolean!
     // }
 
     it('Mock should have the type Me', () => {
@@ -48,6 +50,7 @@ describe('Create a mock of GraphQL Schema', () => {
       expect(mock.Me.users[0].email).to.be.a('string')
       expect(mock.Me.users[0].family).to.exist
       expect(mock.Me.users[0].family.name).to.be.a('string')
+      expect(mock.Me.verified).to.be.a('boolean')
     })
   })
 

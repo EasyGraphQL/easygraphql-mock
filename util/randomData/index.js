@@ -3,6 +3,7 @@
 const constants = require('../constants')
 const randomStringData = require('./string')
 const randomNumberData = require('./number')
+const randomBooleanData = require('./boolean')
 
 function createData (field, schemaName, opts = {}, schema, nestedCall) {
   // In case the user set some values to the mock
@@ -39,6 +40,8 @@ function createData (field, schemaName, opts = {}, schema, nestedCall) {
       return randomNumberData(field)
     case constants.float:
       return randomNumberData(field, true)
+    case constants.boolean:
+      return randomBooleanData(field)
 
     default:
       // In case that the type is not found, check if it exists on the schema,

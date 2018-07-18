@@ -6,6 +6,7 @@ const constants = {
   string: 'String',
   int: 'Int',
   float: 'Float',
+  boolean: 'Boolean',
   email: 'email',
   phone: 'phone'
 }

@@ -41,6 +41,8 @@ describe('Parse GraphQL schema into an object', () => {
     //   fullName: String!
     //   phone: [Int]!
     //   apiKey: String!
+    //   users: [User]!
+    //   verified: Boolean!
     // }
 
     it('Schema should have the type Me', () => {
@@ -48,7 +50,7 @@ describe('Parse GraphQL schema into an object', () => {
       expect(schema.Me.type).to.be.eq('ObjectType')
       expect(schema.Me.description).to.be.eq(undefined)
       expect(schema.Me.fields.length).to.be.gt(0)
-      expect(schema.Me.fields.length).to.be.eq(8)
+      expect(schema.Me.fields.length).to.be.eq(9)
     })
 
     it('Schema should have the properties with the null type and array type', () => {
