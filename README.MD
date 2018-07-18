@@ -48,6 +48,9 @@ console.log(mock.Me)
 console.log(mock.Me.email) // 'test@test.com'
 ```
 
+## Demo
+Here is a [Demo](https://github.com/EasyGraphQL/easygqlmock-demo) that can be useful!
+
 # License
 ### The MIT License
 
