@@ -1,0 +1,61 @@
+scalar JSON
+
+type Family {
+  name: String!
+  ages: [Int]!
+}
+
+type Me {
+  id: ID!
+  email: String
+  username: [String]!
+  fullName: String!
+  result: Float
+  phone: [Int]!
+  apiKey: String! # This is going to be the id of the user on the front-end
+  users: [User]!
+}
+
+type User {
+  email: String!
+  username: String!
+  fullName: String!
+  phone: String!
+  family: Family!
+}
+
+# MUTATIONS
+
+# Create a new User
+input UserInput {
+  email: String!
+  username: String!
+  fullName: String!
+  password: String!
+}
+# Login
+input LoginInput {
+  email: String!
+  password: String!
+}
+# Update password
+input UpdatePasswordInput {
+  oldPassword: String!
+  newPassword: String!
+}
+
+type Query {
+  getMe: Me
+  getUserByUsername(username: String!, id: Int!): User
+}
+
+type Mutation {
+  createUser(input: UserInput!): Me
+  login(input: LoginInput!): Me
+  updatePassword(input: UpdatePasswordInput!): Me
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}

@@ -1,0 +1,35 @@
+{
+  "name": "easygqlmock",
+  "version": "0.0.1",
+  "description": "Create mocks of your GraphQL Schema",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "nodejs",
+    "graphql",
+    "mock",
+    "schema"
+  ],
+  "homepage": "https://github.com/EasyGraphQL/easygqlmock",
+  "author": {
+    "name": "estrada9166",
+    "url": "https://github.com/estrada9166"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EasyGraphQL/easygqlmock"
+  },
+  "bugs": {
+    "url": "https://github.com/EasyGraphQL/easygqlmock/issues"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "graphql": "^0.13.2"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0"
+  }
+}
