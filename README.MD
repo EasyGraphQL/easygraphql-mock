@@ -25,7 +25,7 @@ const mock = easygqlmock(schemaCode)
 console.log(mock.Me)
 ```
 
-### With defined values
+### With definitions
 You can set some values to the fields that you want on the schema. To do that, you might pass
 an object to `easygqlmock` as a second argument. It should have the name of the type and the
 field that you want to set.
