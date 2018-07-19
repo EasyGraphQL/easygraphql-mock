@@ -1,11 +1,17 @@
-# Easy GQL Mock 
+<h1 align="center">
+  <img src="https://cdn.rawgit.com/EasyGraphQL/easygraphql-mock/baab331c/EasyGraphQL.png" alt="EasyGraphQL Mock " width="350">
+  <br>
+  EasyGraphQL Mock 
+  <br>
+  <br>
+</h1>
 
 Easy GraphQL mock is a node library used to create mocks of the schema. It will create
 mocks of all the types that are on the GraphQL Schema, nested types are supported.
 
 ## Installation
 ```bash
-$ npm install easygqlmock --save
+$ npm install easygraphql-mock --save
 ```
 
 ## Usage
@@ -15,11 +21,11 @@ To get started with the mocks, you might need to follow the next steps:
 ```js
 const fs = require('fs')
 const path = require('path')
-const easygqlmock = require('easygqlmock')
+const mocker = require('easygraphql-mock')
 // Read the `graphql` file with the schema
 const schemaCode = fs.readFileSync(path.join(__dirname, 'schema', 'schema.gql'), 'utf8')
 
-const mock = easygqlmock(schemaCode)
+const mock = mocker(schemaCode)
 
 // All the types that are on the file are going to be created with a mock
 console.log(mock.Me)
@@ -33,11 +39,11 @@ field that you want to set.
 ```js
 const fs = require('fs')
 const path = require('path')
-const easygqlmock = require('easygqlmock')
+const mocker = require('easygraphql-mock')
 // Read the `graphql` file with the schema
 const schemaCode = fs.readFileSync(path.join(__dirname, 'schema', 'schema.gql'), 'utf8')
 
-const mock = easygqlmock(schemaCode, {
+const mock = mocker(schemaCode, {
   Me: {
     email: 'test@test.com'
   }
@@ -72,9 +78,9 @@ type User {
 }
 ```
 
-Run `easygqlmock`
+Run `mocker`
 ```js
-const mock = easygqlmock(schemaCode, {
+const mock = mocker(schemaCode, {
   Me: {
     id: '123',
     fullName: 'Hello World!',
@@ -119,7 +125,7 @@ And something like this will be the result
 ```
 
 ## Demo
-Here is a [Demo](https://github.com/EasyGraphQL/easygqlmock-demo) that can be useful!
+Here is a [Demo](https://github.com/EasyGraphQL/easygraphql-mock-demo) that can be useful!
 
 # License
 ### The MIT License
