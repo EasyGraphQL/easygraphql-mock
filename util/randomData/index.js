@@ -5,7 +5,7 @@ const randomStringData = require('./string')
 const randomNumberData = require('./number')
 const randomBooleanData = require('./boolean')
 
-function createData (field, schemaName, opts = {}, schema, nestedCall) {
+function createData (field, schemaName, opts = {}, schema, deepLevel, nestedCall) {
   // In case the user set some values to the mock
   if (opts[schemaName] && opts[schemaName][field.name]) {
     // If the field can't be null and the value doesn't exists
@@ -51,12 +51,12 @@ function createData (field, schemaName, opts = {}, schema, nestedCall) {
           const arrLength = Math.floor(Math.random() * 10) + 1
           const dataArr = []
           for (let i = 0; i < arrLength; i++) {
-            dataArr.push(mockNestedData(schema[field.type].fields, field.type, opts, schema))
+            dataArr.push(mockNestedData(schema[field.type].fields, field.type, opts, schema, deepLevel))
           }
           return dataArr
         }
 
-        return mockNestedData(schema[field.type].fields, field.type, opts, schema)
+        return mockNestedData(schema[field.type].fields, field.type, opts, schema, deepLevel)
       }
   }
 }
@@ -75,10 +75,11 @@ function fieldTypes (type) {
   }
 }
 
-function mockNestedData (fields, schemaName, opts, schema) {
+function mockNestedData (fields, schemaName, opts, schema, deepLevel = 0) {
+  deepLevel++
   const mockField = {}
   // validate if the Schema has fields with the types
-  if (fields && fields.length > 0) {
+  if (fields && fields.length > 0 && deepLevel < 10) {
     // Loop all the fields, to access the name and type (to create the random value)
     fields.forEach(field => {
       let data
@@ -88,11 +89,11 @@ function mockNestedData (fields, schemaName, opts, schema) {
         const arrLength = Math.floor(Math.random() * 10) + 1
         const dataArr = []
         for (let i = 0; i < arrLength; i++) {
-          dataArr.push(createData(field, schemaName, opts, schema, true))
+          dataArr.push(createData(field, schemaName, opts, schema, deepLevel, true))
         }
         data = dataArr
       } else {
-        data = createData(field, schemaName, opts, schema, true)
+        data = createData(field, schemaName, opts, schema, deepLevel, true)
       }
 
       // If the field can be null, randomly return null or the random string

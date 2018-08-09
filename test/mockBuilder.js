@@ -2,7 +2,7 @@
 
 const fs = require('fs')
 const path = require('path')
-var { expect } = require('chai')
+const { expect } = require('chai')
 const easygqlmock = require('../lib/mockBuilder')
 
 const schemaCode = fs.readFileSync(path.join(__dirname, 'schema', 'schema.gql'), 'utf8')
@@ -60,6 +60,7 @@ describe('Create a mock of GraphQL Schema', () => {
     //   username: String!
     //   fullName: String!
     //   phone: String!
+    //   family: Family!
     // }
 
     it('Mock should have the type User', () => {
@@ -68,6 +69,17 @@ describe('Create a mock of GraphQL Schema', () => {
       expect(mock.User.username).to.be.a('string')
       expect(mock.User.fullName).to.be.a('string')
       expect(mock.User.phone).to.be.a('string')
+    })
+
+    it('User mock should have the family type with a user mock nested', () => {
+      expect(mock.User.family).to.exist
+      expect(mock.User.family.name).to.be.a('string')
+      expect(mock.User.family.ages).to.be.a('array')
+      expect(mock.User.family.user).to.exist
+      expect(mock.User.family.user.email).to.be.a('string')
+      expect(mock.User.family.user.username).to.be.a('string')
+      expect(mock.User.family.user.fullName).to.be.a('string')
+      expect(mock.User.family.user.phone).to.be.a('string')
     })
   })
 

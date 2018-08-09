@@ -1,0 +1,42 @@
+{
+  "name": "easygqlmock-demo",
+  "version": "0.0.2",
+  "description": "",
+  "main": "src/App.js",
+  "scripts": {
+    "start": "node src/App.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "standard": "standard",
+    "standard-fix": "standard --fix"
+  },
+  "keywords": [
+    "nodejs",
+    "graphql",
+    "mock",
+    "schema"
+  ],
+  "homepage": "https://github.com/EasyGraphQL/easygraphql-mock-demo",
+  "author": {
+    "name": "EasyGraphQL",
+    "url": "https://github.com/EasyGraphQL"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EasyGraphQL/easygraphql-mock-demo"
+  },
+  "bugs": {
+    "url": "https://github.com/EasyGraphQL/easygraphql-mock-demo/issues"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "easygraphql-mock": "0.0.4",
+    "express": "^4.16.2",
+    "express-graphql": "^0.6.12",
+    "graphql": "^0.13.1",
+    "graphql-type-json": "^0.2.1"
+  },
+  "devDependencies": {
+    "standard": "^11.0.0"
+  }
+}

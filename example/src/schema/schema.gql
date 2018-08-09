@@ -1,29 +1,28 @@
 scalar JSON
 
-type Family {
-  name: String!
-  ages: [Int]!
-  user: User!
-}
-
-type Me {
-  id: ID!
-  email: String
-  username: [String]!
-  fullName: String!
-  result: Float
-  phone: [Int]!
-  apiKey: String! # This is going to be the id of the user on the front-end
-  users: [User]!
-  verified: Boolean!
-}
-
 type User {
   email: String!
   username: String!
   fullName: String!
-  phone: String!
-  family: Family!
+}
+
+type Me {
+  id: ID!
+  email: String!
+  username: String!
+  fullName: String!
+  addresses: [String]!
+  scores: [Int]!
+  age: Int
+  phone: [String]!
+  apiKey: String! # This is going to be the id of the user on the front-end
+  familyInfo: [FamilyInfo]!
+}
+
+type FamilyInfo {
+  father: User!
+  mother: User!
+  brothers: [User]!
 }
 
 # MUTATIONS
@@ -48,16 +47,11 @@ input UpdatePasswordInput {
 
 type Query {
   getMe: Me
-  getUserByUsername(username: String!, id: Int!): User
+  getUserByUsername(username: String!): User
 }
 
 type Mutation {
-  createUser(input: UserInput!): Me
+  createUser(input: UserInput!): User
   login(input: LoginInput!): Me
   updatePassword(input: UpdatePasswordInput!): Me
-}
-
-schema {
-  query: Query
-  mutation: Mutation
 }

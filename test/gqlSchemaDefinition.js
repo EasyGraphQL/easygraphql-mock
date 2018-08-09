@@ -2,7 +2,7 @@
 
 const fs = require('fs')
 const path = require('path')
-var { expect } = require('chai')
+const { expect } = require('chai')
 const schemaParser = require('../lib/schemaParser')
 
 const schemaCode = fs.readFileSync(path.join(__dirname, 'schema', 'schema.gql'), 'utf8')
