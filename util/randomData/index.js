@@ -107,7 +107,7 @@ function mockNestedData (fields, schemaName, opts, schema, deepLevel = 0) {
       }
 
       // If there is a way to mock the field, set it on mockfield obj with the random value
-      if (data === null || data) {
+      if (data === null || data || typeof data === 'boolean') {
         mockField[field.name] = data
       }
     })
