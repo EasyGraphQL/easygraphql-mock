@@ -36,10 +36,13 @@ function createData (field, schemaName, opts = {}, schema, deepLevel, nestedCall
     case constants.ID:
     case constants.string:
       return randomStringData(field)
+
     case constants.int:
       return randomNumberData(field)
+
     case constants.float:
       return randomNumberData(field, true)
+
     case constants.boolean:
       return randomBooleanData(field)
 
@@ -67,6 +70,7 @@ function fieldTypes (type) {
     case constants.ID:
     case constants.string:
       return 'string'
+
     case constants.int:
     case constants.float:
       return 'number'

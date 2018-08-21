@@ -106,19 +106,19 @@ And something like this will be the result
   friends:
    [ { email: 'ADXYwQl@TbOD.com',
        username: 'WvshkLncWMeWuqmDIJ',
-       fullName: 'PLmtYCCuiiYTs',
+       fullName: 'Willie Nunez',
        phone: '(614)-054-5551' },
      { email: 'mBDCzWB@DDRN.com',
        username: 'JnUbiaddMmcC',
-       fullName: 'IfXumMC',
+       fullName: 'Lydia Douglas',
        phone: '(535)-528-2819' },
      { email: 'uKzyenG@ZegA.com',
        username: 'vOkoEWyTRnSFWB',
-       fullName: 'MVoBlKaqqgbgXNMijBLay',
+       fullName: 'Alberta Vasquez',
        phone: '(472)-781-0329' },
      { email: 'haXXGeT@vIVR.com',
        username: 'BuruVBagIgPnINNxCM',
-       fullName: 'aNFEWbDNEApYGId',
+       fullName: 'Christian Colon',
        phone: '(467)-394-9571' } ],
   verified: false 
 }

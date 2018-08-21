@@ -1,6 +1,9 @@
 'use strict'
 
+const Chance = require('chance')
 const constants = require('../constants')
+
+const chance = new Chance()
 
 function randomNumberData (field, float) {
   let data
@@ -32,6 +35,9 @@ function createDataType (field, float) {
   }
 
   switch (field.name.toLowerCase()) {
+    case constants.age:
+      return chance.age()
+
     case constants.phone:
       return createPhone()
 
