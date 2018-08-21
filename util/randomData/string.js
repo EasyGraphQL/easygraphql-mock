@@ -1,6 +1,9 @@
 'use strict'
 
+const Chance = require('chance')
 const constants = require('../constants')
+
+const chance = new Chance()
 
 function randomStringData (field) {
   let data
@@ -28,24 +31,42 @@ function randomStringData (field) {
 
 function createDataType (fieldName) {
   switch (fieldName) {
+    case constants.name:
+    case constants.firstName:
+    case constants.first:
+      return chance.first()
+
+    case constants.lastName:
+    case constants.last:
+      return chance.last()
+
+    case constants.fullName:
+      return chance.name()
+
+    case constants.gender:
+      return chance.gender()
+
+    case constants.prefix:
+      return chance.prefix()
+
     case constants.email:
-      return createEmail()
+      return chance.email()
+
     case constants.phone:
-      return createPhone()
+      return chance.phone()
+
+    case constants.profession:
+      return chance.profession()
+
+    case constants.date:
+      return chance.date({ string: true })
+
     case constants.id:
       return createId()
 
     default:
       return createString()
   }
-}
-
-function createEmail () {
-  return `${createString(7)}@${createString(4)}.com`
-}
-
-function createPhone () {
-  return `(${createNumberString(null, true)})-${createNumberString()}-${createNumberString(4)}`
 }
 
 function createId () {
