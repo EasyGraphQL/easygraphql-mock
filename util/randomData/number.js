@@ -36,6 +36,7 @@ function createDataType (field, float) {
 
   switch (field.name.toLowerCase()) {
     case constants.age:
+    case constants.ages:
       return chance.age()
 
     case constants.phone:

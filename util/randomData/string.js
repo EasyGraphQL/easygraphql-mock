@@ -32,6 +32,7 @@ function randomStringData (field) {
 function createDataType (fieldName) {
   switch (fieldName) {
     case constants.name:
+    case constants.names:
     case constants.firstName:
     case constants.first:
       return chance.first()
@@ -41,25 +42,44 @@ function createDataType (fieldName) {
       return chance.last()
 
     case constants.fullName:
+    case constants.fullNames:
       return chance.name()
 
     case constants.gender:
+    case constants.genders:
       return chance.gender()
 
     case constants.prefix:
+    case constants.prefixes:
       return chance.prefix()
 
     case constants.email:
+    case constants.emails:
       return chance.email()
 
     case constants.phone:
+    case constants.phones:
       return chance.phone()
 
     case constants.profession:
+    case constants.professions:
       return chance.profession()
 
     case constants.date:
+    case constants.dates:
       return chance.date({ string: true })
+
+    case constants.address:
+    case constants.addresses:
+      return chance.address({ short_suffix: true })
+
+    case constants.city:
+    case constants.cities:
+      return chance.city()
+
+    case constants.country:
+    case constants.countries:
+      return chance.country({ full: true })
 
     case constants.id:
       return createId()

@@ -11,12 +11,16 @@ type Me {
   email: String!
   username: String!
   fullName: String!
-  addresses: [String]!
+  profession: String!
+  gender: String!
+  address: String!
+  country: String!
+  date: String!
   scores: [Int]!
-  age: Int
-  phone: [String]!
-  apiKey: String! # This is going to be the id of the user on the front-end
-  familyInfo: [FamilyInfo]!
+  age: Int!
+  phone: String!
+  apiKey: String!
+  familyInfo: FamilyInfo!
 }
 
 type FamilyInfo {
