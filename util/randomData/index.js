@@ -1,3 +1,5 @@
+/* eslint-disable valid-typeof */
+
 'use strict'
 
 const constants = require('../constants')
@@ -89,7 +91,7 @@ function mockNestedData (fields, schemaName, opts, schema, deepLevel = 0) {
       let data
 
       // If it is an array, create a random length array of strings
-      if (field.isArray) {
+      if (field.isArray && field.type !== constants.ID && field.type !== constants.string && field.type !== constants.int && field.type !== constants.float) {
         const arrLength = Math.floor(Math.random() * 10) + 1
         const dataArr = []
         for (let i = 0; i < arrLength; i++) {

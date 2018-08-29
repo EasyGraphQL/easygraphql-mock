@@ -1,3 +1,6 @@
+/* eslint-env mocha */
+/* eslint-disable no-unused-expressions */
+
 'use strict'
 
 const fs = require('fs')

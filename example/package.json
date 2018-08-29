@@ -5,9 +5,7 @@
   "main": "src/App.js",
   "scripts": {
     "start": "node src/App.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "standard": "standard",
-    "standard-fix": "standard --fix"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "nodejs",
@@ -37,6 +35,6 @@
     "graphql-type-json": "^0.2.1"
   },
   "devDependencies": {
-    "standard": "^11.0.0"
+    "standard": "^11.0.1"
   }
 }
