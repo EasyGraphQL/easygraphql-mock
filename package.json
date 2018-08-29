@@ -1,6 +1,6 @@
 {
   "name": "easygraphql-mock",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Create mocks of your GraphQL Schema",
   "main": "index.js",
   "scripts": {
