@@ -31,7 +31,7 @@ describe('#Util', () => {
 
       const boolean = randomBooleanData(field)
 
-      if (boolean) {
+      if (typeof boolean === 'boolean') {
         expect(boolean).to.be.a('boolean')
       } else {
         expect(boolean).to.be.null

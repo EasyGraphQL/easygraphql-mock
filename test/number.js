@@ -31,7 +31,7 @@ describe('#Util', () => {
 
       const number = randomNumberData(field)
 
-      if (number) {
+      if (typeof number === 'number') {
         expect(number).to.be.a('number')
       } else {
         expect(number).to.be.null
