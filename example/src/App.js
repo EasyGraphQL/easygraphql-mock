@@ -11,7 +11,7 @@ const root = require('./schema/resolvers')
 const app = express()
 
 app.set('port', 7000)
-app.use(bodyParser.json({limit: '10mb'}))
+app.use(bodyParser.json({ limit: '10mb' }))
 app.use(bodyParser.urlencoded({ extended: true }))
 
 const schemaCode = fs.readFileSync(path.join(__dirname, 'schema', 'schema.gql'), 'utf8')

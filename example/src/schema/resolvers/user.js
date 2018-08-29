@@ -37,7 +37,6 @@ const user = {
         email: 'test@test.com'
       }
     })
-
     return mock.Me
   },
 
