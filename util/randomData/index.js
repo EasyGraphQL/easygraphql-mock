@@ -34,7 +34,9 @@ function createData (field, schemaName, opts = {}, schema, deepLevel, nestedCall
     return opts[schemaName][field.name]
   }
 
+  // Switch the different types of data to create a random value of it.
   switch (field.type) {
+    // The ID is a type string by default on GraphQL.
     case constants.ID:
     case constants.string:
       return randomStringData(field)
@@ -82,6 +84,7 @@ function fieldTypes (type) {
 }
 
 function mockNestedData (fields, schemaName, opts, schema, deepLevel = 0) {
+  // Must check the deeplevel, we don't want to create an infinite loop.
   deepLevel++
   const mockField = {}
   // validate if the Schema has fields with the types
