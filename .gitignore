@@ -2,3 +2,4 @@
 .vscode
 .npmignore
 .nyc_output
+.DS_Store
