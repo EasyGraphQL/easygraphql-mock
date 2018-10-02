@@ -4,7 +4,7 @@
   "description": "Create mocks of your GraphQL Schema",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha",
+    "test": "nyc --check-coverage --lines 90 mocha",
     "standard": "standard",
     "standard-fix": "standard --fix"
   },
