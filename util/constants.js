@@ -34,11 +34,25 @@ const constants = {
   city: 'city',
   cities: 'cities',
   country: 'country',
-  countries: 'countries'
+  countries: 'countries',
+  timestamp: 'timestamp',
+  timestamps: 'timestamps',
+  hammertime: 'hammertime',
+  hammertimes: 'hammertimes',
   timezone: 'timezone',
   timezones: 'timezones',
   weekday: 'weekday',
   weekdays: 'weekdays',
+  hour: 'hour',
+  hours: 'hours',
+  minute: 'minute',
+  minutes: 'minutes',
+  second: 'second',
+  seconds: 'seconds',
+  millisecond: 'millisecond',
+  milliseconds: 'milliseconds',
+  year: 'year',
+  years: 'years'
 }
 
 module.exports = constants

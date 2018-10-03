@@ -42,6 +42,32 @@ function createDataType (field, float) {
     case constants.phone:
       return createPhone()
 
+    case constants.timestamp:
+    case constants.timestamps:
+      return chance.timestamp()
+
+    case constants.hammertime:
+    case constants.hammertimes:
+      return chance.hammertime()
+
+    case constants.hour:
+    case constants.hours:
+      return chance.hour()
+
+    case constants.minute:
+    case constants.minutes:
+    case constants.second:
+    case constants.seconds:
+      return chance.second()
+
+    case constants.millisecond:
+    case constants.milliseconds:
+      return chance.millisecond()
+
+    case constants.year:
+    case constants.years:
+      return parseInt(chance.year())
+
     default:
       return createRandomNumber()
   }
