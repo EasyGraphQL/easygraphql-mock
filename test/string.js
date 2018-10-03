@@ -167,4 +167,30 @@ describe('#Util', () => {
       expect(string.length).to.be.gt(0)
     })
   })
+
+  it('Should create a timezone string', () => {
+    const field = {
+      isArray: false,
+      noNull: true,
+      name: 'timezone'
+    }
+
+    const string = randomStringData(field)
+
+    expect(string).to.be.a('string')
+    expect(string.length).to.be.gt(0)
+  })
+
+  it('Should create a weekday string', () => {
+    const field = {
+      isArray: false,
+      noNull: true,
+      name: 'weekday'
+    }
+
+    const string = randomStringData(field)
+
+    expect(string).to.be.a('string')
+    expect(string).to.be.oneOf(['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'])
+  })
 })

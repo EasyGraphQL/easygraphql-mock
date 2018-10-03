@@ -62,5 +62,101 @@ describe('#Util', () => {
 
       expect(number).to.be.a('number')
     })
+
+    it('Should return a timestamp number', () => {
+      const field = {
+        isArray: false,
+        noNull: true,
+        name: 'timestamp'
+      }
+
+      const number = randomNumberData(field)
+
+      expect(number).to.be.a('number')
+      expect(number).to.be.gt(0)
+    })
+
+    it('Should return a hammertime number', () => {
+      const field = {
+        isArray: false,
+        noNull: true,
+        name: 'hammertime'
+      }
+
+      const number = randomNumberData(field)
+
+      expect(number).to.be.a('number')
+      expect(number).to.be.gt(0)
+    })
+
+    it('Should return a hour number', () => {
+      const field = {
+        isArray: false,
+        noNull: true,
+        name: 'hour'
+      }
+
+      const number = randomNumberData(field)
+
+      expect(number).to.be.a('number')
+      expect(number).to.be.gte(0)
+      expect(number).to.be.lt(24)
+    })
+
+    it('Should return a minute number', () => {
+      const field = {
+        isArray: false,
+        noNull: true,
+        name: 'minute'
+      }
+
+      const number = randomNumberData(field)
+
+      expect(number).to.be.a('number')
+      expect(number).to.be.gte(0)
+      expect(number).to.be.lt(60)
+    })
+
+    it('Should return a second number', () => {
+      const field = {
+        isArray: false,
+        noNull: true,
+        name: 'second'
+      }
+
+      const number = randomNumberData(field)
+
+      expect(number).to.be.a('number')
+      expect(number).to.be.gte(0)
+      expect(number).to.be.lt(60)
+    })
+
+    it('Should return a millisecond number', () => {
+      const field = {
+        isArray: false,
+        noNull: true,
+        name: 'millisecond'
+      }
+
+      const number = randomNumberData(field)
+
+      expect(number).to.be.a('number')
+      expect(number).to.be.gte(0)
+      expect(number).to.be.lt(1000)
+    })
+
+    it('Should return a year number', () => {
+      const field = {
+        isArray: false,
+        noNull: true,
+        name: 'year'
+      }
+
+      const number = randomNumberData(field)
+
+      expect(number).to.be.a('number')
+      expect(number).to.be.gte(0)
+      expect(number).to.be.lt(2300)
+    })
   })
 })
