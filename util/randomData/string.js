@@ -84,6 +84,14 @@ function createDataType (fieldName) {
     case constants.id:
       return createId()
 
+    case constants.timezone:
+    case constants.timezones:
+      return chance.timezone().name
+
+    case constants.weekday:
+    case constants.weekdays:
+      return chance.weekday()
+
     default:
       return createString()
   }

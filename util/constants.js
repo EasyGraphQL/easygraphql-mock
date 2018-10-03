@@ -35,6 +35,10 @@ const constants = {
   cities: 'cities',
   country: 'country',
   countries: 'countries'
+  timezone: 'timezone',
+  timezones: 'timezones',
+  weekday: 'weekday',
+  weekdays: 'weekdays',
 }
 
 module.exports = constants
