@@ -53,6 +53,7 @@ describe('Create a mock of GraphQL Schema', () => {
       expect(mock.Me.users[0].email).to.be.a('string')
       expect(mock.Me.users[0].family).to.exist
       expect(mock.Me.users[0].family.name).to.be.a('string')
+      expect(['Father', 'Mother', 'Brother']).to.include(mock.Me.users[0].family.familyRelation)
       expect(mock.Me.verified).to.be.a('boolean')
     })
   })

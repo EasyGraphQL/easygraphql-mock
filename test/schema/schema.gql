@@ -1,9 +1,15 @@
 scalar JSON
+enum FamilyRelation {
+  Father
+  Mother
+  Brother
+}
 
 type Family {
   name: String!
   ages: [Int]!
   user: User!
+  familyRelation: FamilyRelation!
 }
 
 type Me {

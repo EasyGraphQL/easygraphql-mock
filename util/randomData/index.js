@@ -58,9 +58,19 @@ function createData (field, schemaName, opts = {}, schema, deepLevel, nestedCall
           const arrLength = Math.floor(Math.random() * 10) + 1
           const dataArr = []
           for (let i = 0; i < arrLength; i++) {
-            dataArr.push(mockNestedData(schema[field.type].fields, field.type, opts, schema, deepLevel))
+            if (schema[field.type].values.length > 0) {
+              const values = schema[field.type].values
+              dataArr.push(values[Math.floor(Math.random() * values.length)])
+            } else {
+              dataArr.push(mockNestedData(schema[field.type].fields, field.type, opts, schema, deepLevel))
+            }
           }
           return dataArr
+        }
+
+        if (schema[field.type].values.length > 0) {
+          const values = schema[field.type].values
+          return values[Math.floor(Math.random() * values.length)]
         }
 
         return mockNestedData(schema[field.type].fields, field.type, opts, schema, deepLevel)
