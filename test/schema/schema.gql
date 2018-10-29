@@ -10,6 +10,7 @@ type Family {
   ages: [Int]!
   user: User!
   familyRelation: FamilyRelation!
+  familyRelationArr: [FamilyRelation]!
 }
 
 type Me {
@@ -19,7 +20,7 @@ type Me {
   fullName: String!
   result: Float
   phone: [Int]!
-  apiKey: String! # This is going to be the id of the user on the front-end
+  apiKey: String!
   users: [User]!
   verified: Boolean!
 }

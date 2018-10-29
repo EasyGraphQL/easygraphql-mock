@@ -20,6 +20,21 @@ describe('Create a mock of GraphQL Schema', () => {
         fullName: 'Hello World!',
         username: ['estrada9166'],
         result: 10
+      },
+      Family: {
+        name: 'Super test 1',
+        ages: [10],
+        User: {
+          fullName: 'Super test 2',
+          email: 'test@test.com',
+          Family: {
+            name: 'My family name',
+            ages: [10, 20],
+            familyRelation: 'Brother'
+          }
+        },
+        familyRelation: 'Mother',
+        familyRelationArr: ['Mother', 'Brother']
       }
     })
   })
@@ -55,6 +70,103 @@ describe('Create a mock of GraphQL Schema', () => {
       expect(mock.Me.users[0].family.name).to.be.a('string')
       expect(['Father', 'Mother', 'Brother']).to.include(mock.Me.users[0].family.familyRelation)
       expect(mock.Me.verified).to.be.a('boolean')
+    })
+  })
+
+  describe('Mock Type Family', () => {
+    // enum FamilyRelation {
+    //   Father
+    //   Mother
+    //   Brother
+    // }
+
+    // type Family {
+    //   name: String!
+    //   ages: [Int]!
+    //   user: User!
+    //   familyRelation: FamilyRelation!
+    // }
+
+    it('Mock should have the type Family', () => {
+      expect(mock.Family.name).to.be.eq('Super test 1')
+      expect(mock.Family.ages).to.be.a('array')
+      expect(mock.Family.ages[0]).to.be.eq(10)
+      expect(['Father', 'Mother', 'Brother']).to.include(mock.Family.familyRelation)
+      expect(['Father', 'Mother', 'Brother']).to.include(mock.Family.familyRelationArr[0])
+      expect(['Father', 'Mother', 'Brother']).to.include(mock.Family.familyRelationArr[1])
+      expect(mock.Family.familyRelation).to.be.eq('Mother')
+      expect(mock.Family.user).to.exist
+      expect(mock.Family.user.fullName).to.be.eq('Super test 2')
+      expect(mock.Family.user.family).to.exist
+      expect(mock.Family.user.family.name).to.be.eq('My family name')
+      expect(mock.Family.user.family.ages).to.be.a('array')
+      expect(mock.Family.user.family.ages.length).to.be.gt(1)
+      expect(mock.Family.user.family.ages[0]).to.be.eq(10)
+      expect(mock.Family.user.family.familyRelation).to.be.eq('Brother')
+      expect(['Father', 'Mother', 'Brother']).to.include(mock.Family.user.family.familyRelation)
+      expect([10, 20]).to.include(mock.Family.user.family.ages[0])
+      expect([10, 20]).to.include(mock.Family.user.family.ages[1])
+      expect(mock.Family.user.family.familyRelationArr).to.be.a('array')
+    })
+
+    it('Should fail if the enum value is different', () => {
+      let error
+      try {
+        easygqlmock(schemaCode, {
+          Family: {
+            familyRelation: 'Invalid enum value'
+          }
+        })
+      } catch (err) {
+        error = err
+      }
+
+      expect(error).to.exist
+    })
+
+    it('Should fail if the enum values are different on familyRelationArr', () => {
+      let error
+      try {
+        easygqlmock(schemaCode, {
+          Family: {
+            familyRelationArr: ['Invalid enum value']
+          }
+        })
+      } catch (err) {
+        error = err
+      }
+
+      expect(error).to.exist
+    })
+
+    it('Should fail if the ages is not arr', () => {
+      let error
+      try {
+        easygqlmock(schemaCode, {
+          Family: {
+            ages: 'Not array'
+          }
+        })
+      } catch (err) {
+        error = err
+      }
+
+      expect(error).to.exist
+    })
+
+    it('Should fail if the ages values are different type', () => {
+      let error
+      try {
+        easygqlmock(schemaCode, {
+          Family: {
+            ages: ['Invalid', 'ages', 'type']
+          }
+        })
+      } catch (err) {
+        error = err
+      }
+
+      expect(error).to.exist
     })
   })
 

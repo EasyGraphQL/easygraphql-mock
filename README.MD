@@ -44,30 +44,44 @@ const mocker = require('easygraphql-mock')
 const schemaCode = fs.readFileSync(path.join(__dirname, 'schema', 'schema.gql'), 'utf8')
 
 const mock = mocker(schemaCode, {
-  Me: {
-    email: 'test@test.com'
+  Family: {
+    name: 'Super test 1',
+    ages: [10],
+    User: {
+      fullName: 'Super test 2',
+      email: 'test@test.com',
+      Family: {
+        name: 'My family name',
+        ages: [10, 20],
+        familyRelation: 'Brother'
+      }
+    },
+    familyRelation: 'Mother',
+    familyRelationArr: ['Mother', 'Brother']
   }
 })
 
 // All the types that are on the file are going to be created with a mock
-console.log(mock.Me)
-console.log(mock.Me.email) // 'test@test.com'
+console.log(mock.Family)
+console.log(mock.Family.name) // 'Super test 1'
 ```
 
 ## Result
 
 If the `gql` schema has:
 ```graphql
-type Me {
-  id: ID!
-  email: String
-  username: [String]!
-  fullName: String!
-  result: Float
-  phone: [Int]!
-  apiKey: String!
-  friends: [User]!
-  verified: Boolean!
+enum FamilyRelation {
+  Father
+  Mother
+  Brother
+}
+
+type Family {
+  name: String!
+  ages: [Int]!
+  user: User!
+  familyRelation: FamilyRelation!
+  familyRelationArr: [FamilyRelation]!
 }
 
 type User {
@@ -75,52 +89,58 @@ type User {
   username: String!
   fullName: String!
   phone: String!
+  family: Family!
 }
 ```
 
 Run `mocker`
 ```js
 const mock = mocker(schemaCode, {
-  Me: {
-    id: '123',
-    fullName: 'Hello World!',
-    username: ['estrada9166'],
-    result: 10
+  Family: {
+    name: 'Super test 1',
+    ages: [10],
+    User: {
+      fullName: 'Super test 2',
+      email: 'test@test.com',
+      Family: {
+        name: 'My family name',
+        ages: [10, 20],
+        familyRelation: 'Brother'
+      }
+    },
+    familyRelation: 'Mother',
+    familyRelationArr: ['Mother', 'Brother']
   }
 })
-console.log(mock.Me)
+console.log(mock.Family)
 ```
 
 And something like this will be the result
 ```js
-{ id: '123',
-  email: null,
-  username: [ 'estrada9166' ],
-  fullName: 'Hello World!',
-  result: 10,
-  phone:
-   [ 7534724385,
-     9263352762,
-     1681394931 ],
-  apiKey: 'bHjVBtthqJNiD',
-  friends:
-   [ { email: 'ADXYwQl@TbOD.com',
-       username: 'WvshkLncWMeWuqmDIJ',
-       fullName: 'Willie Nunez',
-       phone: '(614)-054-5551' },
-     { email: 'mBDCzWB@DDRN.com',
-       username: 'JnUbiaddMmcC',
-       fullName: 'Lydia Douglas',
-       phone: '(535)-528-2819' },
-     { email: 'uKzyenG@ZegA.com',
-       username: 'vOkoEWyTRnSFWB',
-       fullName: 'Alberta Vasquez',
-       phone: '(472)-781-0329' },
-     { email: 'haXXGeT@vIVR.com',
-       username: 'BuruVBagIgPnINNxCM',
-       fullName: 'Christian Colon',
-       phone: '(467)-394-9571' } ],
-  verified: false 
+{ 
+  name: 'Super test 1',
+  ages: [ 10 ],
+  user: { 
+    email: 'test@test.com',
+    username: 'tNfwN',
+    fullName: 'Super test 2',
+    phone: '(231) 616-1744',
+    family: { 
+      name: 'My family name',
+      ages: [ 10, 20 ],
+      user: { 
+        email: 'cokka@kodtuaga.at',
+        username: 'ylAzWTXhIDHNgnxeiQIT',
+        fullName: 'Lina Daniel',
+        phone: '(303) 664-8330',
+        family: ... 
+      },
+      familyRelation: 'Brother',
+      familyRelationArr:[ 'Father', 'Brother', 'Mother', 'Brother'] 
+    }
+  },
+  familyRelation: 'Mother',
+  familyRelationArr: [ 'Mother', 'Brother' ] 
 }
 ```
 

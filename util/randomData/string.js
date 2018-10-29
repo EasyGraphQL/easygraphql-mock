@@ -2,6 +2,7 @@
 
 const Chance = require('chance')
 const constants = require('../constants')
+const { randomNumber } = require('../utils')
 
 const chance = new Chance()
 
@@ -10,7 +11,7 @@ function randomStringData (field) {
 
   // If it is an array, create a random length array of strings
   if (field.isArray) {
-    const arrLength = Math.floor(Math.random() * 10) + 1
+    const arrLength = randomNumber(1, 10)
     const dataArr = []
     for (let i = 0; i < arrLength; i++) {
       dataArr.push(createDataType(field.name.toLowerCase()))
@@ -22,7 +23,7 @@ function randomStringData (field) {
 
   // If the field can be null, randomly return null or the random string
   if (!field.noNull) {
-    const selectedAnswer = Math.floor(Math.random() * 2)
+    const selectedAnswer = randomNumber(0, 1)
     return [null, data][selectedAnswer]
   }
 
@@ -82,7 +83,7 @@ function createDataType (fieldName) {
       return chance.country({ full: true })
 
     case constants.id:
-      return createId()
+      return createRandomId()
 
     case constants.timezone:
     case constants.timezones:
@@ -93,27 +94,23 @@ function createDataType (fieldName) {
       return chance.weekday()
 
     default:
-      return createString()
+      return createRandomString()
   }
 }
 
-function createId () {
-  return createNumberString(2, true)
-}
-
-function createString (length) {
+function createRandomString (length) {
   const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  length = length || Math.floor((Math.random() * 20) + 5)
+  length = length || randomNumber(5, 20)
   let result = ''
-  for (let i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)]
+  for (let i = length; i > 0; --i) result += chars[randomNumber(0, chars.length)]
   return result
 }
 
-function createNumberString (length, gtCero = false) {
-  const chars = gtCero ? '123456789' : '0123456789'
-  length = length || 3
+function createRandomId () {
+  const chars = '123456789'
+  const length = 2
   let result = ''
-  for (let i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)]
+  for (let i = length; i > 0; --i) result += chars[randomNumber(0, chars.length)]
   return result
 }
 

@@ -5,6 +5,7 @@ const constants = {
   id: 'id',
   string: 'String',
   int: 'Int',
+  number: 'number',
   float: 'Float',
   boolean: 'Boolean',
   email: 'email',

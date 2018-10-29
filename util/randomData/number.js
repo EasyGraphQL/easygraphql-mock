@@ -2,6 +2,7 @@
 
 const Chance = require('chance')
 const constants = require('../constants')
+const { randomNumber } = require('../utils')
 
 const chance = new Chance()
 
@@ -10,7 +11,7 @@ function randomNumberData (field, float) {
 
   // If it is an array, create a random length array of numbers
   if (field.isArray) {
-    const arrLength = Math.floor(Math.random() * 10) + 1
+    const arrLength = randomNumber(1, 10)
     const dataArr = []
     for (let i = 0; i < arrLength; i++) {
       dataArr.push(createDataType(field, float))
@@ -22,7 +23,7 @@ function randomNumberData (field, float) {
 
   // If the field can be null, randomly return null or the random number
   if (!field.noNull) {
-    const selectedAnswer = Math.floor(Math.random() * 2)
+    const selectedAnswer = randomNumber(0, 1)
     return [null, data][selectedAnswer]
   }
 
@@ -38,9 +39,6 @@ function createDataType (field, float) {
     case constants.age:
     case constants.ages:
       return chance.age()
-
-    case constants.phone:
-      return createPhone()
 
     case constants.timestamp:
     case constants.timestamps:
@@ -71,12 +69,6 @@ function createDataType (field, float) {
     default:
       return createRandomNumber()
   }
-}
-
-function createPhone () {
-  const a = Math.floor(Math.random() * 10000000)
-  const b = Math.floor(Math.random() * 1000) + 1
-  return parseInt(('' + a + b))
 }
 
 function createRandomNumber (float) {
