@@ -10,6 +10,9 @@ Easy GraphQL mock is a node library used to create mocks of the schema. It will 
 mocks of all the types that are on the GraphQL Schema, nested types are supported.
 
 ## Installation
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/EasyGraphQL/easygraphql-mock.svg)](https://greenkeeper.io/)
+
 ```bash
 $ npm install easygraphql-mock --save
 ```
