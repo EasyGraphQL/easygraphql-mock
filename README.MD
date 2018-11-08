@@ -50,15 +50,6 @@ const mock = mocker(schemaCode, {
   Family: {
     name: 'Super test 1',
     ages: [10],
-    User: {
-      fullName: 'Super test 2',
-      email: 'test@test.com',
-      Family: {
-        name: 'My family name',
-        ages: [10, 20],
-        familyRelation: 'Brother'
-      }
-    },
     familyRelation: 'Mother',
     familyRelationArr: ['Mother', 'Brother']
   }
@@ -102,15 +93,6 @@ const mock = mocker(schemaCode, {
   Family: {
     name: 'Super test 1',
     ages: [10],
-    User: {
-      fullName: 'Super test 2',
-      email: 'test@test.com',
-      Family: {
-        name: 'My family name',
-        ages: [10, 20],
-        familyRelation: 'Brother'
-      }
-    },
     familyRelation: 'Mother',
     familyRelationArr: ['Mother', 'Brother']
   }
@@ -118,28 +100,28 @@ const mock = mocker(schemaCode, {
 console.log(mock.Family)
 ```
 
-And something like this will be the result
+And something like this will be the result for `mock.Family`
 ```js
 { 
   name: 'Super test 1',
   ages: [ 10 ],
   user: { 
-    email: 'test@test.com',
+    email: 'ulalilid@herem.gl',
     username: 'tNfwN',
-    fullName: 'Super test 2',
+    fullName: 'Nathan Lewis',
     phone: '(231) 616-1744',
     family: { 
-      name: 'My family name',
-      ages: [ 10, 20 ],
+      name: 'Super test 1',
+      ages: [ 10 ],
       user: { 
-        email: 'cokka@kodtuaga.at',
-        username: 'ylAzWTXhIDHNgnxeiQIT',
-        fullName: 'Lina Daniel',
-        phone: '(303) 664-8330',
+        email: 'ulalilid@herem.gl',
+        username: tNfwN',
+        fullName: 'Nathan Lewis',
+        phone: '(231) 616-1744',
         family: ... 
       },
-      familyRelation: 'Brother',
-      familyRelationArr:[ 'Father', 'Brother', 'Mother', 'Brother'] 
+      familyRelation: 'Mother',
+      familyRelationArr: [ 'Mother', 'Brother' ] 
     }
   },
   familyRelation: 'Mother',
