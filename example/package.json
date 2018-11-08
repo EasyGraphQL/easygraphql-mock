@@ -28,7 +28,6 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.2",
-    "easygraphql-mock": "0.0.12",
     "express": "^4.16.2",
     "express-graphql": "^0.7.1",
     "graphql": "^14.0.2",
