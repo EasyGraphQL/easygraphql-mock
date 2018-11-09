@@ -1,0 +1,19 @@
+type School {
+  name: String!
+  location: Location!
+  users: [Student]!
+}
+
+input CreateSchoolInput {
+  name: String!
+  location: String!
+}
+
+extend type Query {
+  getSchoolByLocation(location: String!): School!
+  getSchools: [School]!
+}
+
+extend type Mutation {
+  createSchool(input: CreateSchoolInput!): School!
+}
