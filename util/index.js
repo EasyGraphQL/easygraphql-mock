@@ -9,12 +9,12 @@ const randomBooleanData = require('./randomData/boolean')
 const { randomNumber } = require('./utils')
 
 const memoize = (fn) => {
-  let cache = {}
+  const cache = {}
   return (type, customMock, schema, deepLevel) => {
     if (type in cache) {
       return cache[type]
     } else {
-      let result = fn(type, customMock, schema, deepLevel)
+      const result = fn(type, customMock, schema, deepLevel)
       cache[type] = result
       return result
     }
