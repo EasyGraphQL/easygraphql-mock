@@ -1,0 +1,16 @@
+type Location {
+  id: ID!
+  name: String!
+}
+
+input CreateLocationInput {
+  name: String!
+}
+
+extend type Query {
+  getLocations: [Location]!
+}
+
+extend type Mutation {
+  createLocation(input: CreateLocationInput!): Location!
+}
