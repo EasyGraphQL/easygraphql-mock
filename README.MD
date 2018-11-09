@@ -60,6 +60,26 @@ console.log(mock.Family)
 console.log(mock.Family.name) // 'Super test 1'
 ```
 
+## Use multiple Schema files
+You can pass multiple schema files, just be shure that you extend the queries and mutations and 
+when you're creating the mock pass an array with the files:
+
+
+```js
+const fs = require('fs')
+const path = require('path')
+const mocker = require('easygraphql-mock')
+// Read the `graphql` file with the schema
+const studentSchema = fs.readFileSync(path.join(__dirname, 'schema', 'student.gql'), 'utf8')
+const schoolSchema = fs.readFileSync(path.join(__dirname, 'schema', 'school.gql'), 'utf8')
+
+const mock = mocker([studentSchema, schoolSchema])
+
+// All the types that are on the file are going to be created with a mock
+console.log(mock.Student)
+console.log(mock.School) 
+```
+
 ## Result
 
 If the `gql` schema has:
