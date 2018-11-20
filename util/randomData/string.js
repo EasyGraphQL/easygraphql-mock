@@ -107,11 +107,7 @@ function createRandomString (length) {
 }
 
 function createRandomId () {
-  const chars = '123456789'
-  const length = 2
-  let result = ''
-  for (let i = length; i > 0; --i) result += chars[randomNumber(0, chars.length)]
-  return result
+  return randomNumber(1, 99).toString()
 }
 
 module.exports = randomStringData

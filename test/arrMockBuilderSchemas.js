@@ -20,7 +20,7 @@ describe('Parse arr of schemas into one obj', () => {
   })
 
   describe('Type Student', () => {
-    it('Should have the Studen', () => {
+    it('Should have the Student', () => {
       expect(mock.Student).to.exist
       expect(mock.Student.email).to.be.a('string')
       expect(mock.Student.username).to.be.a('string')
@@ -54,6 +54,7 @@ describe('Parse arr of schemas into one obj', () => {
       expect(mock.Query.getSchoolByLocation).to.exist
       expect(mock.Query.getSchools).to.exist
       expect(mock.Query.getLocations).to.exist
+      expect(mock.Query.search).to.exist
     })
   })
 

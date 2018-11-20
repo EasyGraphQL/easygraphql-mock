@@ -1,3 +1,5 @@
+union SearchResult = Student | School | Location
+
 type Student {
   email: String!
   username: String!
@@ -14,6 +16,7 @@ input StudentInput {
 type Query {
   getStudentByUsername(username: String!, name: String!): Student
   getStudents: [Student]!
+  search(nname: String!): [SearchResult]!
 }
 
 type Mutation {

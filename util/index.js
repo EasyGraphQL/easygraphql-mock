@@ -78,10 +78,15 @@ function createData (field, schemaName, customMock = {}, schema, deepLevel) {
           const arrLength = randomNumber(1, 3)
           const dataArr = []
           for (let i = 0; i < arrLength; i++) {
+            // Validate if is enun value
             if (schema[field.type].values.length > 0) {
-              const values = schema[field.type].values
-              const selectedValue = randomNumber(0, values.length - 1)
-              dataArr.push(values[selectedValue])
+              dataArr.push(selecteEnumVal(field, schema))
+            // validate if is union
+            } else if (schema[field.type].types.length > 0) {
+              const type = getUnionVal(field, schema)
+              dataArr.push(
+                memoizedField(type, customMock, schema, deepLevel)
+              )
             } else {
               dataArr.push(
                 memoizedField(field.type, customMock, schema, deepLevel)
@@ -95,9 +100,14 @@ function createData (field, schemaName, customMock = {}, schema, deepLevel) {
         // the schema, and if it has defined values, in that case, we can choose
         // an existing value.
         if (schema[field.type].values.length > 0) {
-          const values = schema[field.type].values
-          const selectedValue = randomNumber(0, values.length - 1)
-          return values[selectedValue]
+          return selecteEnumVal(field, schema)
+        }
+
+        // If the nensted type is an union, the values that are going to be assigned
+        // are going to be one of each type inside the union.
+        if (schema[field.type].types.length > 0) {
+          const type = getUnionVal(field, schema)
+          return memoizedField(type, customMock, schema, deepLevel)
         }
 
         // To handle a nested data, we might pass, the fields of the nested data,
@@ -106,6 +116,18 @@ function createData (field, schemaName, customMock = {}, schema, deepLevel) {
         return memoizedField(field.type, customMock, schema, deepLevel)
       }
   }
+}
+
+function selecteEnumVal (field, schema) {
+  const values = schema[field.type].values
+  const selectedValue = randomNumber(0, values.length - 1)
+  return values[selectedValue]
+}
+
+function getUnionVal (field, schema) {
+  const types = schema[field.type].types
+  const selectedValue = randomNumber(0, types.length - 1)
+  return types[selectedValue]
 }
 
 module.exports = memoizedField
