@@ -138,7 +138,7 @@ And something like this will be the result for `mock.Family`
         username: tNfwN',
         fullName: 'Nathan Lewis',
         phone: '(231) 616-1744',
-        family: ... 
+        family: '...'
       },
       familyRelation: 'Mother',
       familyRelationArr: [ 'Mother', 'Brother' ] 
