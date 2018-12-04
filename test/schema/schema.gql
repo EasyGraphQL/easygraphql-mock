@@ -26,6 +26,7 @@ type Me {
 }
 
 type User {
+  me: Me!
   email: String!
   username: String!
   fullName: String!
