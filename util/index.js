@@ -14,8 +14,12 @@ const memoize = (fn) => {
     if (type in cache) {
       return cache[type]
     } else {
-      const result = fn(type, customMock, schema, deepLevel)
+      // To handle cycles in schema types put a reference to the mocked field in
+      // the cache before attempting to compute its properties.
+      const result = {}
       cache[type] = result
+      const mock = fn(type, customMock, schema, deepLevel)
+      Object.assign(result, mock)
       return result
     }
   }

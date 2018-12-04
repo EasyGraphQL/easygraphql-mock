@@ -99,6 +99,7 @@ describe('Create a mock of GraphQL Schema', () => {
 
   describe('Type User', () => {
     // type User {
+    //   me: Me!
     //   email: String!
     //   username: String!
     //   fullName: String!
@@ -123,6 +124,26 @@ describe('Create a mock of GraphQL Schema', () => {
       expect(mock.User.family.user.username).to.be.a('string')
       expect(mock.User.family.user.fullName).to.be.a('string')
       expect(mock.User.family.user.phone).to.be.a('string')
+    })
+
+    it('User mock should reference a Me mock with full set of mocked fields', () => {
+      expect(mock.User.me).to.exist
+      expect(mock.User.me.id).to.be.a('string')
+      expect(mock.User.me.id).to.be.eq('123')
+      expect(mock.User.me.username).to.be.a('array')
+      expect(mock.User.me.username[0]).to.be.a('string')
+      expect(mock.User.me.username[0]).to.be.eq('estrada9166')
+      expect(mock.User.me.fullName).to.be.a('string')
+      expect(mock.User.me.fullName).to.be.eq('Hello World!')
+      expect(mock.User.me.phone).to.be.a('array')
+      expect(mock.User.me.phone[0]).to.be.a('number')
+      expect(mock.User.me.apiKey).to.be.a('string')
+      expect(mock.User.me.users).to.exist
+      expect(mock.User.me.users[0].email).to.be.a('string')
+      expect(mock.User.me.users[0].family).to.exist
+      expect(mock.User.me.users[0].family.name).to.be.a('string')
+      expect(['Father', 'Mother', 'Brother']).to.include(mock.User.me.users[0].family.familyRelation)
+      expect(mock.User.me.verified).to.be.a('boolean')
     })
   })
 
