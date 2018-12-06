@@ -10,7 +10,7 @@ const { randomNumber } = require('./utils')
 
 const memoize = (fn) => {
   const cache = {}
-  return (type, customMock, schema, deepLevel) => {
+  return (type, customMock, schema) => {
     if (type in cache) {
       return cache[type]
     } else {
@@ -18,25 +18,26 @@ const memoize = (fn) => {
       // the cache before attempting to compute its properties.
       const result = {}
       cache[type] = result
-      const mock = fn(type, customMock, schema, deepLevel)
+      const mock = fn(type, customMock, schema)
       Object.assign(result, mock)
       return result
     }
   }
 }
 
-const mockedField = (type, customMock, schema, deepLevel = 0) => {
+const mockedField = (type, customMock, schema) => {
   // This will be the result of each field inside the type, the key is going to
   // be the same name that is set inside the type.
   const mockField = {}
   // Validate if the type have fields that need to be mocked.
   if (schema[type].fields && schema[type].fields.length > 0) {
     schema[type].fields.forEach(field => {
-      const data = createData(field, type, customMock, schema, deepLevel)
-      // If the mocked value is valid, it will be asigned to the field name.
-      if (data === null || data || typeof data === 'boolean') {
-        mockField[field.name] = data
+      const data = createData(field, type, customMock, schema)
+      if (data === undefined) {
+        throw new Error(`Type "${field.type}" not found in document.`)
       }
+      // If the mocked value is valid, it will be asigned to the field name.
+      mockField[field.name] = data
     })
   }
   return mockField
@@ -44,12 +45,7 @@ const mockedField = (type, customMock, schema, deepLevel = 0) => {
 
 const memoizedField = memoize(mockedField)
 
-function createData (field, schemaName, customMock = {}, schema, deepLevel) {
-  deepLevel++
-  if (deepLevel > 9) {
-    return {}
-  }
-
+function createData (field, schemaName, customMock = {}, schema) {
   // Validate if the schema name exists on the custom mock and also check if the
   // actual field exists, in case that it exists, make the validations to set it
   // as result.
@@ -89,11 +85,11 @@ function createData (field, schemaName, customMock = {}, schema, deepLevel) {
             } else if (schema[field.type].types.length > 0) {
               const type = getUnionVal(field, schema)
               dataArr.push(
-                memoizedField(type, customMock, schema, deepLevel)
+                memoizedField(type, customMock, schema)
               )
             } else {
               dataArr.push(
-                memoizedField(field.type, customMock, schema, deepLevel)
+                memoizedField(field.type, customMock, schema)
               )
             }
           }
@@ -111,13 +107,13 @@ function createData (field, schemaName, customMock = {}, schema, deepLevel) {
         // are going to be one of each type inside the union.
         if (schema[field.type].types.length > 0) {
           const type = getUnionVal(field, schema)
-          return memoizedField(type, customMock, schema, deepLevel)
+          return memoizedField(type, customMock, schema)
         }
 
         // To handle a nested data, we might pass, the fields of the nested data,
         // The field.type that is going to be the new schema name, also the custom mock,
         // the complete schema and the deep level to prevent an infint loop.
-        return memoizedField(field.type, customMock, schema, deepLevel)
+        return memoizedField(field.type, customMock, schema)
       }
   }
 }
