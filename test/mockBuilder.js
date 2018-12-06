@@ -9,6 +9,7 @@ const { expect } = require('chai')
 const easygqlmock = require('../lib/mockBuilder')
 
 const schemaCode = fs.readFileSync(path.join(__dirname, 'schema', 'schema.gql'), 'utf8')
+const invalidSchema = fs.readFileSync(path.join(__dirname, 'schema', 'invalidSchema.gql'), 'utf8')
 
 describe('Create a mock of GraphQL Schema', () => {
   let mock
@@ -188,5 +189,19 @@ describe('Create a mock of GraphQL Schema', () => {
       expect(mock.UpdatePasswordInput.oldPassword).to.be.a('string')
       expect(mock.UpdatePasswordInput.newPassword).to.be.a('string')
     })
+  })
+})
+
+describe('It should fail if there is a type missing on the schema', () => {
+  it('Should fail if User is missing on schema', () => {
+    let error
+    try {
+      easygqlmock(invalidSchema)
+    } catch (err) {
+      error = err
+    }
+
+    expect(error).to.exist
+    expect(error.message).to.be.eq('Type "User" not found in document.')
   })
 })

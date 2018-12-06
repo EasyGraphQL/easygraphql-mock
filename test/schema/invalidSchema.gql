@@ -1,0 +1,9 @@
+type City {
+  id: ID!
+  name: String!
+  user: User!
+}
+
+extend type Query {
+  getLocations: [City]!
+}
