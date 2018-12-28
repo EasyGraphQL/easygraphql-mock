@@ -84,7 +84,7 @@ const mockedSchema = easygraphqlMock([userSchema, familySchema], {
 ### Result
 Here is the result of `mockedSchema.Family`
 
-```json
+```js
 { 
   name: 'Super test 1',
   ages: [ 10 ],
@@ -99,7 +99,7 @@ Here is the result of `mockedSchema.Family`
       ages: [ 10 ],
       user: { 
         email: 'ulalilid@herem.gl',
-        username: tNfwN',
+        username: 'tNfwN',
         fullName: 'Nathan Lewis',
         phone: '(231) 616-1744',
         family: '...'
