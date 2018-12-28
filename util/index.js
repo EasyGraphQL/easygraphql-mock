@@ -46,6 +46,15 @@ const mockedField = (type, customMock, schema) => {
 const memoizedField = memoize(mockedField)
 
 function createData (field, schemaName, customMock = {}, schema) {
+  // Validate if the field is a scalar, if it's validate if there is a custom
+  // value to assign to it.
+  if (
+    schema[field.type] &&
+    schema[field.type].type === 'ScalarTypeDefinition' &&
+    customMock[field.type]
+  ) {
+    return customMock[field.type]
+  }
   // Validate if the schema name exists on the custom mock and also check if the
   // actual field exists, in case that it exists, make the validations to set it
   // as result.

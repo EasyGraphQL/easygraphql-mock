@@ -16,6 +16,7 @@ describe('Create a mock of GraphQL Schema', () => {
 
   before(() => {
     mock = easygqlmock(schemaCode, {
+      DateTime: '2018-10-10',
       Me: {
         id: '123',
         fullName: 'Hello World!',
@@ -62,6 +63,8 @@ describe('Create a mock of GraphQL Schema', () => {
       expect(mock.Me.users[0].family.name).to.be.a('string')
       expect(['Father', 'Mother', 'Brother']).to.include(mock.Me.users[0].family.familyRelation)
       expect(mock.Me.verified).to.be.a('boolean')
+      expect(mock.Me.createdAt).to.be.exist
+      expect(mock.Me.createdAt).to.be.eq('2018-10-10')
     })
   })
 
