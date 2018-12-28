@@ -6,47 +6,72 @@
   <br>
 </h1>
 
-Easy GraphQL mock is a node library used to create mocks of the schema. It will create
-mocks of all the types that are on the GraphQL Schema, nested types are supported.
+[![Coverage Status](https://coveralls.io/repos/github/EasyGraphQL/easygraphql-mock/badge.svg?branch=master)](https://coveralls.io/github/EasyGraphQL/easygraphql-mock?branch=master) [![Greenkeeper badge](https://badges.greenkeeper.io/EasyGraphQL/easygraphql-mock.svg)](https://greenkeeper.io/)
+
+`easygraphql-mock` is a node library used to create mocks of a schema. 
+It will create mocks of all the types that are on the GraphQL Schema, including the nested types.
 
 ## Installation
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/EasyGraphQL/easygraphql-mock.svg)](https://greenkeeper.io/)
-
-```bash
+To install the package on your project just run on the root of your project
+```shell
 $ npm install easygraphql-mock --save
 ```
 
-## Usage
-To get started with the mocks, you might need to follow the next steps:
+## How to use it?
 
-### Basic
++ Import [`easygraphql-mock`](https://github.com/EasyGraphQL/easygraphql-mock) package.
++ Read the schema.
++ Initialize the mock, and pass the schema as the first argument.
+  + If there are multiples schemas pass an array with the schemas an argument.
+  + **Note**: In order to use multiples schema files, the queries and mutations must be extended.
++ The second argument is optional and it is going to be your custom schema, in case you want to pass it.
+
+*In case you have a custom scalar, set it on the second argument, if it's not set it will be {}*
+
+### One schema file
 ```js
+'use strict' 
+
+const easygraphqlMock = require('easygraphql-mock')
 const fs = require('fs')
 const path = require('path')
-const mocker = require('easygraphql-mock')
-// Read the `graphql` file with the schema
-const schemaCode = fs.readFileSync(path.join(__dirname, 'schema', 'schema.gql'), 'utf8')
 
-const mock = mocker(schemaCode)
+const userSchema = fs.readFileSync(path.join(__dirname, 'schema', 'user.gql'), 'utf8')
 
-// All the types that are on the file are going to be created with a mock
-console.log(mock.Me)
+const mockedSchema = easygraphqlMock(userSchema)
 ```
 
-### With definitions
-You can set some values to the fields that you want on the schema. To do that, you might pass
-an object to `easygqlmock` as a second argument. It should have the name of the type and the
-field that you want to set.
-
+### Multiples schemas files
 ```js
+'use strict' 
+
+const easygraphqlMock = require('easygraphql-mock')
 const fs = require('fs')
 const path = require('path')
-const mocker = require('easygraphql-mock')
-// Read the `graphql` file with the schema
-const schemaCode = fs.readFileSync(path.join(__dirname, 'schema', 'schema.gql'), 'utf8')
 
-const mock = mocker(schemaCode, {
+const userSchema = fs.readFileSync(path.join(__dirname, 'schema', 'user.gql'), 'utf8')
+const familySchema = fs.readFileSync(path.join(__dirname, 'schema', 'family.gql'), 'utf8')
+
+const mockedSchema = easygraphqlMock([userSchema, familySchema])
+```
+
+### Custom schema
+You can set some values to the fields that you want on the schema. To do that, you might pass an object as a second argument. 
+It must have the same name of the type and the field that you want to set.
+
+```js
+'use strict' 
+
+const easygraphqlMock = require('easygraphql-mock')
+const fs = require('fs')
+const path = require('path')
+
+const userSchema = fs.readFileSync(path.join(__dirname, 'schema', 'user.gql'), 'utf8')
+const familySchema = fs.readFileSync(path.join(__dirname, 'schema', 'family.gql'), 'utf8')
+
+const mockedSchema = easygraphqlMock([userSchema, familySchema], {
+  CustomScalarDate: '2018-10-10',
   Family: {
     name: 'Super test 1',
     ages: [10],
@@ -54,77 +79,16 @@ const mock = mocker(schemaCode, {
     familyRelationArr: ['Mother', 'Brother']
   }
 })
-
-// All the types that are on the file are going to be created with a mock
-console.log(mock.Family)
-console.log(mock.Family.name) // 'Super test 1'
 ```
 
-## Use multiple Schema files
-You can pass multiple schema files, just be shure that you extend the queries and mutations and 
-when you're creating the mock pass an array with the files:
+### Result
+Here is the result of `mockedSchema.Family`
 
-
-```js
-const fs = require('fs')
-const path = require('path')
-const mocker = require('easygraphql-mock')
-// Read the `graphql` file with the schema
-const studentSchema = fs.readFileSync(path.join(__dirname, 'schema', 'student.gql'), 'utf8')
-const schoolSchema = fs.readFileSync(path.join(__dirname, 'schema', 'school.gql'), 'utf8')
-
-const mock = mocker([studentSchema, schoolSchema])
-
-// All the types that are on the file are going to be created with a mock
-console.log(mock.Student)
-console.log(mock.School) 
-```
-
-## Result
-
-If the `gql` schema has:
-```graphql
-enum FamilyRelation {
-  Father
-  Mother
-  Brother
-}
-
-type Family {
-  name: String!
-  ages: [Int]!
-  user: User!
-  familyRelation: FamilyRelation!
-  familyRelationArr: [FamilyRelation]!
-}
-
-type User {
-  email: String!
-  username: String!
-  fullName: String!
-  phone: String!
-  family: Family!
-}
-```
-
-Run `mocker`
-```js
-const mock = mocker(schemaCode, {
-  Family: {
-    name: 'Super test 1',
-    ages: [10],
-    familyRelation: 'Mother',
-    familyRelationArr: ['Mother', 'Brother']
-  }
-})
-console.log(mock.Family)
-```
-
-And something like this will be the result for `mock.Family`
 ```js
 { 
   name: 'Super test 1',
   ages: [ 10 ],
+  createdAt: '2018-10-10',
   user: { 
     email: 'ulalilid@herem.gl',
     username: 'tNfwN',
@@ -138,7 +102,7 @@ And something like this will be the result for `mock.Family`
         username: tNfwN',
         fullName: 'Nathan Lewis',
         phone: '(231) 616-1744',
-        family: '...'
+        family: ...
       },
       familyRelation: 'Mother',
       familyRelationArr: [ 'Mother', 'Brother' ] 

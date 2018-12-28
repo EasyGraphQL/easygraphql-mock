@@ -1,4 +1,5 @@
-scalar JSON
+scalar DateTime
+
 enum FamilyRelation {
   Father
   Mother
@@ -23,6 +24,7 @@ type Me {
   apiKey: String!
   users: [User]!
   verified: Boolean!
+  createdAt: DateTime!
 }
 
 type User {
