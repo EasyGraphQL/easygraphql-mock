@@ -102,7 +102,7 @@ Here is the result of `mockedSchema.Family`
         username: tNfwN',
         fullName: 'Nathan Lewis',
         phone: '(231) 616-1744',
-        family: ...
+        family: '...'
       },
       familyRelation: 'Mother',
       familyRelationArr: [ 'Mother', 'Brother' ] 
