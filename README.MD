@@ -99,7 +99,7 @@ Here is the result of `mockedSchema.Family`
       ages: [ 10 ],
       user: { 
         email: 'ulalilid@herem.gl',
-        username: tNfwN',
+        username: 'tNfwN',
         fullName: 'Nathan Lewis',
         phone: '(231) 616-1744',
         family: '...'
