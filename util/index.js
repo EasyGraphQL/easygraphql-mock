@@ -17,7 +17,6 @@ const memoize = (fn) => {
       // To handle cycles in schema types put a reference to the mocked field in
       // the cache before attempting to compute its properties.
       const result = {
-        // set the typename for types
         __typename: type
       }
       cache[type] = result
