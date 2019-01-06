@@ -94,9 +94,9 @@ function createData (field, schemaName, customMock = {}, schema) {
               dataArr.push(selecteEnumVal(field, schema))
             // validate if is union
             } else if (schema[field.type].types.length > 0) {
-              const type = getUnionVal(field, schema)
-              dataArr.push(
-                memoizedField(type, customMock, schema)
+              const types = getUnionVals(field, schema)
+              types.forEach(type =>
+                dataArr.push(memoizedField(type, customMock, schema))
               )
             } else {
               dataArr.push(
@@ -139,6 +139,10 @@ function getUnionVal (field, schema) {
   const types = schema[field.type].types
   const selectedValue = randomNumber(0, types.length - 1)
   return types[selectedValue]
+}
+
+function getUnionVals (field, schema) {
+  return schema[field.type].types
 }
 
 module.exports = memoizedField
