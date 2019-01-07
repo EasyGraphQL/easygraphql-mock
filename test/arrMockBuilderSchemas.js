@@ -55,6 +55,9 @@ describe('Parse arr of schemas into one obj', () => {
       expect(mock.Query.getSchools).to.exist
       expect(mock.Query.getLocations).to.exist
       expect(mock.Query.search).to.exist
+      expect(mock.Query.search.some(member => member.__typename === 'Student')).to.be.true
+      expect(mock.Query.search.some(member => member.__typename === 'School')).to.be.true
+      expect(mock.Query.search.some(member => member.__typename === 'Location')).to.be.true
     })
   })
 
