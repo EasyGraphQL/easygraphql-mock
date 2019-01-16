@@ -8,8 +8,8 @@ const randomNumberData = require('./randomData/number')
 const randomBooleanData = require('./randomData/boolean')
 const { randomNumber } = require('./utils')
 
+let cache = {}
 const memoize = (fn) => {
-  const cache = {}
   return (type, customMock, schema) => {
     if (type in cache) {
       return cache[type]
@@ -25,6 +25,10 @@ const memoize = (fn) => {
       return result
     }
   }
+}
+
+const clearMemoizedFields = () => {
+  cache = {}
 }
 
 const mockedField = (type, customMock, schema) => {
@@ -145,4 +149,4 @@ function getUnionVals (field, schema) {
   return schema[field.type].types
 }
 
-module.exports = memoizedField
+module.exports = { memoizedField, clearMemoizedFields }
