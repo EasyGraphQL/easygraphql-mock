@@ -31,7 +31,7 @@
     "express": "^4.16.2",
     "express-graphql": "^0.7.1",
     "graphql": "^14.0.2",
-    "graphql-type-json": "^0.2.1"
+    "graphql-type-json": "^0.3.0"
   },
   "devDependencies": {
     "standard": "^12.0.1"
