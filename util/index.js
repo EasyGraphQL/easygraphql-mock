@@ -16,8 +16,11 @@ const memoize = (fn) => {
     } else {
       // To handle cycles in schema types put a reference to the mocked field in
       // the cache before attempting to compute its properties.
-      const result = {
-        __typename: type
+      const result = {}
+      if (schema[type].type === 'InterfaceTypeDefinition' && schema[type].implementedTypes.length) {
+        result['__typename'] = schema[type].implementedTypes[0]
+      } else {
+        result['__typename'] = type
       }
       cache[type] = result
       const mock = fn(type, customMock, schema)
