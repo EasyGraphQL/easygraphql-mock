@@ -1,6 +1,6 @@
 "use strict";
 
-const Chance = require("chance");
+const chance = require("../chance");
 const constants = require("../constants");
 const { randomNumber } = require("../utils");
 

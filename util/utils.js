@@ -1,6 +1,4 @@
-const Chance = require("chance");
-
-const chance = new Chance(123);
+const chance = require("./chance");
 
 function randomNumber(min, max) {
   return chance.integer({ min, max });

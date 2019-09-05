@@ -1,10 +1,9 @@
 "use strict";
 
-const Chance = require("chance");
+const chance = require("../chance");
 const constants = require("../constants");
 const { randomNumber } = require("../utils");
 
-const chance = new Chance(123);
 function randomNumberData(field, float) {
   let data;
 
