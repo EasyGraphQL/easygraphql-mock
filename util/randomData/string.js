@@ -1,33 +1,33 @@
-'use strict'
+"use strict";
 
-const Chance = require('chance')
-const constants = require('../constants')
-const { randomNumber } = require('../utils')
+const Chance = require("chance");
+const constants = require("../constants");
+const { randomNumber } = require("../utils");
 
-const chance = new Chance(12)
+const chance = new Chance(123);
 
 function randomStringData(field) {
-  let data
+  let data;
 
   // If it is an array, create a random length array of strings
   if (field.isArray) {
-    const arrLength = randomNumber(1, 10)
-    const dataArr = []
+    const arrLength = randomNumber(1, 10);
+    const dataArr = [];
     for (let i = 0; i < arrLength; i++) {
-      dataArr.push(createDataType(field.name.toLowerCase()))
+      dataArr.push(createDataType(field.name.toLowerCase()));
     }
-    data = dataArr
+    data = dataArr;
   } else {
-    data = createDataType(field.name.toLowerCase())
+    data = createDataType(field.name.toLowerCase());
   }
 
   // If the field can be null, randomly return null or the random string
   if (!field.noNull) {
-    const selectedAnswer = randomNumber(0, 1)
-    return [null, data][selectedAnswer]
+    const selectedAnswer = randomNumber(0, 1);
+    return [null, data][selectedAnswer];
   }
 
-  return data
+  return data;
 }
 
 function createDataType(fieldName) {
@@ -36,79 +36,79 @@ function createDataType(fieldName) {
     case constants.names:
     case constants.firstName:
     case constants.first:
-      return chance.first()
+      return chance.first();
 
     case constants.lastName:
     case constants.last:
-      return chance.last()
+      return chance.last();
 
     case constants.fullName:
     case constants.fullNames:
-      return chance.name()
+      return chance.name();
 
     case constants.gender:
     case constants.genders:
-      return chance.gender()
+      return chance.gender();
 
     case constants.prefix:
     case constants.prefixes:
-      return chance.prefix()
+      return chance.prefix();
 
     case constants.email:
     case constants.emails:
-      return chance.email()
+      return chance.email();
 
     case constants.phone:
     case constants.phones:
-      return chance.phone()
+      return chance.phone();
 
     case constants.profession:
     case constants.professions:
-      return chance.profession()
+      return chance.profession();
 
     case constants.date:
     case constants.dates:
-      return chance.date({ string: true })
+      return chance.date({ string: true });
 
     case constants.address:
     case constants.addresses:
-      return chance.address({ short_suffix: true })
+      return chance.address({ short_suffix: true });
 
     case constants.city:
     case constants.cities:
-      return chance.city()
+      return chance.city();
 
     case constants.country:
     case constants.countries:
-      return chance.country({ full: true })
+      return chance.country({ full: true });
 
     case constants.id:
-      return createRandomId()
+      return createRandomId();
 
     case constants.timezone:
     case constants.timezones:
-      return chance.timezone().name
+      return chance.timezone().name;
 
     case constants.weekday:
     case constants.weekdays:
-      return chance.weekday()
+      return chance.weekday();
 
     default:
-      return createRandomString()
+      return createRandomString();
   }
 }
 
 function createRandomString(length) {
-  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  length = length || randomNumber(5, 20)
-  let result = ''
+  const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  length = length || randomNumber(5, 20);
+  let result = "";
   for (let i = length; i > 0; --i)
-    result += chars[randomNumber(0, chars.length)]
-  return result
+    result += chars[randomNumber(0, chars.length)];
+  return result;
 }
 
 function createRandomId() {
-  return randomNumber(1, 99).toString()
+  return randomNumber(1, 99).toString();
 }
 
-module.exports = randomStringData
+module.exports = randomStringData;
