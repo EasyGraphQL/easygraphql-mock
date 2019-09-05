@@ -9,7 +9,7 @@ const randomBooleanData = require('./randomData/boolean')
 const { randomNumber } = require('./utils')
 
 let cache = {}
-const memoize = (fn) => {
+const memoize = fn => {
   return (type, customMock, schema) => {
     if (type in cache) {
       return cache[type]
@@ -17,7 +17,10 @@ const memoize = (fn) => {
       // To handle cycles in schema types put a reference to the mocked field in
       // the cache before attempting to compute its properties.
       const result = {}
-      if (schema[type].type === 'InterfaceTypeDefinition' && schema[type].implementedTypes.length) {
+      if (
+        schema[type].type === 'InterfaceTypeDefinition' &&
+        schema[type].implementedTypes.length
+      ) {
         result['__typename'] = schema[type].implementedTypes[0]
       } else {
         result['__typename'] = type
@@ -54,7 +57,7 @@ const mockedField = (type, customMock, schema) => {
 
 const memoizedField = memoize(mockedField)
 
-function createData (field, schemaName, customMock = {}, schema) {
+function createData(field, schemaName, customMock = {}, schema) {
   // Validate if the field is a scalar, if it's validate if there is a custom
   // value to assign to it.
   if (
@@ -99,16 +102,14 @@ function createData (field, schemaName, customMock = {}, schema) {
             // Validate if is enun value
             if (schema[field.type].values.length > 0) {
               dataArr.push(selecteEnumVal(field, schema))
-            // validate if is union
+              // validate if is union
             } else if (schema[field.type].types.length > 0) {
               const types = getUnionVals(field, schema)
               types.forEach(type =>
-                dataArr.push(memoizedField(type, customMock, schema))
+                dataArr.push(memoizedField(type, customMock, schema)),
               )
             } else {
-              dataArr.push(
-                memoizedField(field.type, customMock, schema)
-              )
+              dataArr.push(memoizedField(field.type, customMock, schema))
             }
           }
           return dataArr
@@ -136,19 +137,19 @@ function createData (field, schemaName, customMock = {}, schema) {
   }
 }
 
-function selecteEnumVal (field, schema) {
+function selecteEnumVal(field, schema) {
   const values = schema[field.type].values
   const selectedValue = randomNumber(0, values.length - 1)
   return values[selectedValue]
 }
 
-function getUnionVal (field, schema) {
+function getUnionVal(field, schema) {
   const types = schema[field.type].types
   const selectedValue = randomNumber(0, types.length - 1)
   return types[selectedValue]
 }
 
-function getUnionVals (field, schema) {
+function getUnionVals(field, schema) {
   return schema[field.type].types
 }
 

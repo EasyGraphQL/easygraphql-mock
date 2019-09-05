@@ -4,9 +4,9 @@ const Chance = require('chance')
 const constants = require('../constants')
 const { randomNumber } = require('../utils')
 
-const chance = new Chance()
+const chance = new Chance(12)
 
-function randomStringData (field) {
+function randomStringData(field) {
   let data
 
   // If it is an array, create a random length array of strings
@@ -30,7 +30,7 @@ function randomStringData (field) {
   return data
 }
 
-function createDataType (fieldName) {
+function createDataType(fieldName) {
   switch (fieldName) {
     case constants.name:
     case constants.names:
@@ -98,15 +98,16 @@ function createDataType (fieldName) {
   }
 }
 
-function createRandomString (length) {
+function createRandomString(length) {
   const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
   length = length || randomNumber(5, 20)
   let result = ''
-  for (let i = length; i > 0; --i) result += chars[randomNumber(0, chars.length)]
+  for (let i = length; i > 0; --i)
+    result += chars[randomNumber(0, chars.length)]
   return result
 }
 
-function createRandomId () {
+function createRandomId() {
   return randomNumber(1, 99).toString()
 }
 

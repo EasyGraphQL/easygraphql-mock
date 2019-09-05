@@ -1,5 +1,9 @@
-function randomNumber (min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min
+const Chance = require('chance')
+
+const chance = new Chance(12)
+
+function randomNumber(min, max) {
+  return chance.integer({ min, max })
 }
 
 module.exports = { randomNumber }
