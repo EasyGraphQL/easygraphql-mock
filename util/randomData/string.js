@@ -4,8 +4,6 @@ const chance = require("../chance");
 const constants = require("../constants");
 const { randomNumber } = require("../utils");
 
-const chance = new Chance(123);
-
 function randomStringData(field) {
   let data;
 
