@@ -1,4 +1,7 @@
-const Chance = require("chance");
+const settings = require('../lib/settings')
 
-const chance = new Chance(123);
-module.exports = chance;
+const Chance = require('chance')
+
+const chance = settings.seed ? new Chance(settings.seed) : new Chance()
+
+module.exports = chance

@@ -57,7 +57,7 @@ const mockedField = (type, customMock, schema) => {
 
 const memoizedField = memoize(mockedField)
 
-function createData(field, schemaName, customMock = {}, schema) {
+function createData (field, schemaName, customMock = {}, schema) {
   // Validate if the field is a scalar, if it's validate if there is a custom
   // value to assign to it.
   if (
@@ -106,7 +106,7 @@ function createData(field, schemaName, customMock = {}, schema) {
             } else if (schema[field.type].types.length > 0) {
               const types = getUnionVals(field, schema)
               types.forEach(type =>
-                dataArr.push(memoizedField(type, customMock, schema)),
+                dataArr.push(memoizedField(type, customMock, schema))
               )
             } else {
               dataArr.push(memoizedField(field.type, customMock, schema))
@@ -137,19 +137,19 @@ function createData(field, schemaName, customMock = {}, schema) {
   }
 }
 
-function selecteEnumVal(field, schema) {
+function selecteEnumVal (field, schema) {
   const values = schema[field.type].values
   const selectedValue = randomNumber(0, values.length - 1)
   return values[selectedValue]
 }
 
-function getUnionVal(field, schema) {
+function getUnionVal (field, schema) {
   const types = schema[field.type].types
   const selectedValue = randomNumber(0, types.length - 1)
   return types[selectedValue]
 }
 
-function getUnionVals(field, schema) {
+function getUnionVals (field, schema) {
   return schema[field.type].types
 }
 

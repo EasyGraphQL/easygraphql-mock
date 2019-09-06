@@ -1,7 +1,7 @@
-const chance = require("./chance");
+const chance = require('./chance')
 
-function randomNumber(min, max) {
-  return chance.integer({ min, max });
+function randomNumber (min, max) {
+  return chance.integer({ min, max })
 }
 
-module.exports = { randomNumber };
+module.exports = { randomNumber }
