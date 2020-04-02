@@ -30,7 +30,7 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "express-graphql": "^0.8.0",
-    "graphql": "^14.0.2",
+    "graphql": "^15.0.0",
     "graphql-type-json": "^0.3.0"
   },
   "devDependencies": {
