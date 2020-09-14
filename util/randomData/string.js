@@ -1,10 +1,8 @@
 'use strict'
 
-const Chance = require('chance')
+const chance = require('../chance')
 const constants = require('../constants')
 const { randomNumber } = require('../utils')
-
-const chance = new Chance()
 
 function randomStringData (field) {
   let data
@@ -102,7 +100,7 @@ function createRandomString (length) {
   const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
   length = length || randomNumber(5, 20)
   let result = ''
-  for (let i = length; i > 0; --i) result += chars[randomNumber(0, chars.length)]
+  for (let i = length; i > 0; --i) { result += chars[randomNumber(0, chars.length)] }
   return result
 }
 

@@ -1,10 +1,8 @@
 'use strict'
 
-const Chance = require('chance')
+const chance = require('../chance')
 const constants = require('../constants')
 const { randomNumber } = require('../utils')
-
-const chance = new Chance()
 
 function randomNumberData (field, float) {
   let data
@@ -73,11 +71,10 @@ function createDataType (field, float) {
 
 function createRandomNumber (float) {
   if (float) {
-    const precision = 100
-    return Math.floor(Math.random() * (10 * precision - 1 * precision) + 1 * precision) / (1 * precision)
+    return chance.floating({ min: 0, max: 10, fixed: 2 })
   }
 
-  return Math.floor(Math.random() * 11)
+  return chance.integer({ min: 0, max: 10 })
 }
 
 module.exports = randomNumberData
